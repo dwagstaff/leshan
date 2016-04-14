@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015 Sierra Wireless and others.
+ * Copyright (c) 2016 Sierra Wireless and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -15,11 +15,26 @@
  *******************************************************************************/
 package org.eclipse.leshan.server.model;
 
-import org.eclipse.leshan.core.model.ObjectLoader;
+import java.util.Collection;
 
-public class StandardModelProvider extends StaticModelProvider {
+import org.eclipse.leshan.core.model.LwM2mModel;
+import org.eclipse.leshan.core.model.ObjectModel;
+import org.eclipse.leshan.server.client.Client;
 
-    public StandardModelProvider() {
-        super(ObjectLoader.loadDefault());
+public class StaticModelProvider implements LwM2mModelProvider {
+    private final LwM2mModel model;
+
+    public StaticModelProvider(Collection<ObjectModel> objects) {
+        this(new LwM2mModel(objects));
+    }
+
+    public StaticModelProvider(LwM2mModel model) {
+        this.model = model;
+    }
+
+    @Override
+    public LwM2mModel getObjectModel(Client client) {
+        // same model for all clients
+        return model;
     }
 }
