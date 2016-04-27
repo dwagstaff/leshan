@@ -180,7 +180,7 @@ public class CaliforniumObservationRegistryImpl
     // ********** NotificationListener interface **********//
 
     @Override
-    public void onResponse(Request coapRequest, Response coapResponse) {
+    public void onNotification(Request coapRequest, Response coapResponse) {
         if (listeners.isEmpty())
             return;
 
@@ -215,26 +215,5 @@ public class CaliforniumObservationRegistryImpl
                 LOG.debug(msg);
             }
         }
-    }
-
-    @Override
-    public void onRetransmission(Request request) {
-    }
-
-    @Override
-    public void onAcknowledgement(Request request) {
-
-    }
-
-    @Override
-    public void onReject(Request request) {
-    }
-
-    @Override
-    public void onTimeout(Request request) {
-    }
-
-    @Override
-    public void onCancel(Request request) {
     }
 }
