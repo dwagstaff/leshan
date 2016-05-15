@@ -54,6 +54,10 @@ public class LeshanClientDemo {
     private final static String DEFAULT_ENDPOINT = "LeshanClientDemo";
     private final static MyLocation locationInstance = new MyLocation();
     private final static String USAGE = "java -jar leshan-client-demo.jar [OPTION]";
+    // TODO Replace with the port where your sender module is connected to.
+    private static final String PORT = "COM4";
+    // TODO Replace with the baud rate of your sender module.
+    private static final int BAUD_RATE = 9600;
 
     public static void main(final String[] args) {
 
@@ -188,7 +192,10 @@ public class LeshanClientDemo {
         }
         initializer.setClassForObject(DEVICE, MyDevice.class);
         initializer.setInstancesForObject(LOCATION, locationInstance);
-        List<LwM2mObjectEnabler> enablers = initializer.create(SECURITY, SERVER, DEVICE, LOCATION);
+
+        initializer.setInstancesForObject(3300, new MyDevice2());
+        initializer.setInstancesForObject(3311, new MyDevice2());
+        List<LwM2mObjectEnabler> enablers = initializer.create(SECURITY, SERVER, DEVICE, LOCATION, 3300, 3311);
 
         // Create client
         LeshanClientBuilder builder = new LeshanClientBuilder(endpoint);
@@ -218,4 +225,11 @@ public class LeshanClientDemo {
         }
         scanner.close();
     }
+
+    // private void startZigbee() {
+    // ZigBeeHost app = new ZigBeeHost("DataV", PORT, BAUD_RATE);
+    // Thread thread = new Thread(app);
+    // thread.setName(app.getClass().getSimpleName());
+    // thread.start();
+    // }
 }

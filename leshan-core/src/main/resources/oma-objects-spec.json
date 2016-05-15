@@ -1380,7 +1380,7 @@
       {
         "id": 5700,
         "name": "Sensor Value",
-        "operations": "R",
+        "operations": "RW",
         "instancetype": "single",
         "mandatory": true,
         "type": "float",
